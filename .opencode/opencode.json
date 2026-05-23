@@ -1,0 +1,23 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": [
+    ".opencode/AGENTS.md",
+    ".opencode/memory/*.md",
+    ".opencode/docs/*.md"
+  ],
+  "agent": {
+    "tutor": {
+      "mode": "primary",
+      "temperature": 0.1,
+      "prompt": "{file:prompts/tutor.txt}",
+      "model": "opencode-go/deepseek-v4-flash",
+      "permission": {
+        "write": "ask",
+        "edit": "ask",
+        "bash": "ask"
+      }
+    }
+  },
+  "formatter": true,
+  "lsp": true
+}
