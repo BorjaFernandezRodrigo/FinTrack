@@ -1,4 +1,5 @@
 # 🍃 Spring Boot: Plan de Aprendizaje para Desarrolladores Senior
+
 ## Ruta de transición NestJS → Spring Boot
 
 > **Para el estudiante:** Tienes 10 años de experiencia y dominas NestJS/Node/Angular. Este plan NO te enseña a programar — te enseña cómo Java y Spring resuelven los mismos problemas que ya resuelves en Node. Cada módulo tiene una columna *"En NestJS lo harías así..."* para que el aprendizaje sea inmediato.
@@ -27,6 +28,7 @@
 ## 🏗️ El Proyecto: FinTrack API
 
 Una API REST de gestión financiera personal con:
+
 - Gestión de usuarios con autenticación JWT
 - Cuentas bancarias y transacciones
 - Categorías y presupuestos
@@ -35,6 +37,7 @@ Una API REST de gestión financiera personal con:
 - Suite de tests unitarios, de integración y E2E
 
 **Stack técnico:**
+
 - Java 21 (LTS)
 - Spring Boot 3.x
 - PostgreSQL
@@ -49,6 +52,7 @@ Una API REST de gestión financiera personal con:
 ## 📦 Módulo 0 — Java Essentials para TypeScript Developers
 
 ### Objetivo
+
 Transición mental TypeScript → Java. No es aprender Java desde cero, es mapear lo que ya sabes.
 
 ### 🔄 Tabla de equivalencias clave
@@ -70,6 +74,7 @@ Transición mental TypeScript → Java. No es aprender Java desde cero, es mapea
 ### Conceptos críticos de Java a dominar
 
 **Generics** — Son como TypeScript generics pero más estrictos en tiempo de compilación
+
 ```java
 // TypeScript
 function identity<T>(arg: T): T { return arg; }
@@ -79,6 +84,7 @@ public <T> T identity(T arg) { return arg; }
 ```
 
 **Streams API** — Como Array.prototype methods en JS pero lazy y componibles
+
 ```java
 List<Integer> result = numbers.stream()
     .filter(n -> n > 5)
@@ -87,6 +93,7 @@ List<Integer> result = numbers.stream()
 ```
 
 **Optional** — Como el optional chaining de TypeScript pero explícito
+
 ```java
 Optional<User> user = userRepo.findById(id);
 user.ifPresent(u -> System.out.println(u.getName()));
@@ -94,12 +101,14 @@ String name = user.map(User::getName).orElse("Unknown");
 ```
 
 **Records** (Java 16+) — Como interfaces de TypeScript con data
+
 ```java
 // TypeScript: type UserDTO = { name: string; email: string }
 public record UserDTO(String name, String email) {}
 ```
 
 **Lambdas y Method References** — Como arrow functions
+
 ```java
 // TypeScript: users.forEach(u => console.log(u))
 users.forEach(u -> System.out.println(u));
@@ -109,26 +118,31 @@ users.forEach(System.out::println); // method reference
 ### Recursos
 
 **Documentación oficial:**
+
 - [Java 21 Language Spec — What's new](https://openjdk.org/projects/jdk/21/)
 - [Java Streams Documentation](https://docs.oracle.com/en/java/api/java.base/java/util/stream/Stream.html)
 - [Records (JEP 395)](https://openjdk.org/jeps/395)
 
 **Artículos / Reading:**
+
 - [Java for JavaScript developers — Baeldung](https://www.baeldung.com/java-for-javascript-developers) *(excelente comparativa directa)*
 - [Modern Java features overview — Baeldung](https://www.baeldung.com/java-8-new-features)
 - [Optional in Java — Baeldung](https://www.baeldung.com/java-optional)
 - [Java Streams — Baeldung](https://www.baeldung.com/java-8-streams)
 
 **Videos:**
+
 - [Java for JavaScript Developers — Amigoscode (YouTube, 1h)](https://www.youtube.com/watch?v=GoXwIVyNvX0)
 - [Modern Java (Records, Sealed Classes, Pattern Matching) — Marco Codes](https://www.youtube.com/c/MarcoCodesJava)
 - [Java 21 Virtual Threads & Modern Features — JetBrains](https://www.youtube.com/watch?v=UVoGE0wpVBM)
 
 **Herramientas:**
+
 - Instalar: [SDKMAN](https://sdkman.io/) — equivalente a `nvm` para Java
 - IDE: [IntelliJ IDEA Community](https://www.jetbrains.com/idea/) — obligatorio, el VS Code de Java
 
 ### 🔨 Proyecto — Sprint 0: Setup
+
 - Instalar Java 21 con SDKMAN
 - Configurar IntelliJ IDEA con plugins: Spring Boot, Lombok, SonarLint
 - Crear el repositorio Git de FinTrack
@@ -141,6 +155,7 @@ users.forEach(System.out::println); // method reference
 ## 📦 Módulo 1 — Spring Core & Spring Boot
 
 ### Objetivo
+
 Entender el corazón de Spring: IoC Container, Dependency Injection, y cómo Boot autoconfigura todo. Mapear esto con el Module system de NestJS.
 
 ### 🔄 NestJS → Spring
@@ -159,6 +174,7 @@ Entender el corazón de Spring: IoC Container, Dependency Injection, y cómo Boo
 ### Conceptos clave
 
 **IoC Container** — El contenedor gestiona el ciclo de vida de los beans
+
 ```java
 // NestJS: @Injectable() class MyService {}
 // Spring:
@@ -176,6 +192,7 @@ public class AccountService {
 **Spring Boot Auto-configuration** — No hay que configurar casi nada. Boot detecta las dependencias en el classpath y configura automáticamente. Si tienes `spring-boot-starter-data-jpa` en tu `pom.xml`, ya tienes JPA configurado.
 
 **application.yml** — El `config.ts` de Spring
+
 ```yaml
 spring:
   profiles:
@@ -195,6 +212,7 @@ app:
 ```
 
 **Profiles** — Como `NODE_ENV`
+
 ```java
 @Configuration
 @Profile("dev")
@@ -205,6 +223,7 @@ public class DevConfig {
 ```
 
 **Bean Scopes** — Singleton por defecto (como los providers de NestJS)
+
 - `@Scope("singleton")` — Una instancia (default)
 - `@Scope("prototype")` — Nueva instancia cada vez
 - `@Scope("request")` — Una por request HTTP
@@ -212,26 +231,31 @@ public class DevConfig {
 ### Recursos
 
 **Documentación oficial:**
+
 - [Spring Framework Core — IoC Container](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html)
 - [Spring Boot Reference — Auto-configuration](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using.auto-configuration)
 - [Spring Initializr](https://start.spring.io/) — El `nest new` de Spring
 
 **Artículos:**
+
 - [Spring IoC Container — Baeldung](https://www.baeldung.com/inversion-control-and-dependency-injection-in-spring)
 - [Spring Boot Auto-configuration — Baeldung](https://www.baeldung.com/spring-boot-auto-configuration)
 - [Spring Profiles — Baeldung](https://www.baeldung.com/spring-profiles)
 - [Spring application.yml config — Baeldung](https://www.baeldung.com/spring-yaml)
 
 **Videos:**
+
 - [Spring Boot 3 Full Course — Amigoscode (YouTube, 3h)](https://www.youtube.com/watch?v=9SGDpanrc8U)
 - [Spring Core Deep Dive — Dan Vega (YouTube)](https://www.youtube.com/@DanVega)
 - [Spring Boot Crash Course — Marco Codes (YouTube)](https://www.youtube.com/watch?v=UgX5lgv4uVM)
 
 **Cursos completos:**
+
 - [Spring & Hibernate for Beginners — Udemy Chad Darby](https://www.udemy.com/course/spring-hibernate-tutorial/) *(Ignorar secciones básicas, ir a Spring Boot 3)*
 - [Master Spring Boot 3 with JPA — Udemy](https://www.udemy.com/course/spring-boot-tutorial-for-beginners/)
 
 ### 🔨 Proyecto — Sprint 1: Estructura base
+
 - Crear proyecto con Spring Initializr (Web, Lombok, DevTools, Actuator)
 - Estructura de paquetes: `domain`, `application`, `infrastructure`, `api`
 - Primer `@Service`, `@Component` con inyección por constructor
@@ -244,6 +268,7 @@ public class DevConfig {
 ## 📦 Módulo 2 — REST API con Spring MVC
 
 ### Objetivo
+
 Construir APIs REST robustas con validación, manejo de errores y buenas prácticas. Es el equivalente directo de los Controllers de NestJS.
 
 ### 🔄 NestJS → Spring MVC
@@ -360,11 +385,13 @@ public class GlobalExceptionHandler {
 ### Recursos
 
 **Documentación oficial:**
+
 - [Spring MVC — Spring Reference](https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#mvc)
 - [Bean Validation — Jakarta EE](https://beanvalidation.org/2.0/spec/)
 - [ProblemDetail RFC 9457](https://www.rfc-editor.org/rfc/rfc9457)
 
 **Artículos:**
+
 - [REST with Spring Tutorial — Baeldung](https://www.baeldung.com/rest-with-spring-series)
 - [Bean Validation — Baeldung](https://www.baeldung.com/javax-validation)
 - [Error Handling for REST with Spring — Baeldung](https://www.baeldung.com/exception-handling-for-rest-with-spring)
@@ -372,11 +399,13 @@ public class GlobalExceptionHandler {
 - [Spring ResponseEntity — Baeldung](https://www.baeldung.com/spring-response-entity)
 
 **Videos:**
+
 - [Building REST APIs with Spring Boot — Amigoscode](https://www.youtube.com/watch?v=9SGDpanrc8U)
 - [Spring Boot REST API Best Practices — Dan Vega](https://www.youtube.com/watch?v=Nv2DERaMx-4)
 - [Exception Handling in Spring Boot — Teddy Smith (YouTube)](https://www.youtube.com/watch?v=PzK4ZXa2Tbc)
 
 ### 🔨 Proyecto — Sprint 2: Endpoints CRUD
+
 - CRUD completo de `Account` y `Transaction`
 - DTOs con validación (request y response separados)
 - GlobalExceptionHandler con ProblemDetail
@@ -389,6 +418,7 @@ public class GlobalExceptionHandler {
 ## 📦 Módulo 3 — Spring Data JPA + PostgreSQL
 
 ### Objetivo
+
 ORM completo con Hibernate. Equivalente a TypeORM/Prisma pero con el poder de JPA estándar.
 
 ### 🔄 TypeORM/Prisma → JPA
@@ -536,11 +566,13 @@ List<Account> findByUserId(Long userId);
 ### Recursos
 
 **Documentación oficial:**
+
 - [Spring Data JPA Reference](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/)
 - [Hibernate ORM User Guide](https://docs.jboss.org/hibernate/orm/6.4/userguide/html_single/)
 - [JPA 3.1 Specification](https://jakarta.ee/specifications/persistence/3.1/)
 
 **Artículos:**
+
 - [Spring Data JPA Tutorial — Baeldung](https://www.baeldung.com/the-persistence-layer-with-spring-data-jpa)
 - [JPA Entity Relationships — Baeldung](https://www.baeldung.com/jpa-many-to-many)
 - [Spring @Transactional — Baeldung](https://www.baeldung.com/transaction-configuration-with-jpa-and-spring)
@@ -549,14 +581,17 @@ List<Account> findByUserId(Long userId);
 - [Hibernate Query Tuning — Vlad Mihalcea (el experto mundial en Hibernate)](https://vladmihalcea.com/tutorials/hibernate/)
 
 **Videos:**
+
 - [Spring Data JPA Full Tutorial — Amigoscode](https://www.youtube.com/watch?v=8SGI_XS5OPw)
 - [JPA & Hibernate Masterclass — Marco Codes (YouTube)](https://www.youtube.com/watch?v=W9-BL5OAPUQ)
 - [Hibernate Performance Gotchas — Vlad Mihalcea (YouTube)](https://www.youtube.com/c/VladMihalcea)
 
 **Libro recomendado:**
+
 - *High-Performance Java Persistence* — Vlad Mihalcea (PDF disponible en su web) — el mejor libro sobre JPA/Hibernate
 
 ### 🔨 Proyecto — Sprint 3: Persistencia
+
 - Entidades: `User`, `Account`, `Transaction`, `Category`, `Budget`
 - Relationships: ManyToOne, OneToMany con lazy loading correcto
 - Custom queries con JPQL y native SQL
@@ -570,6 +605,7 @@ List<Account> findByUserId(Long userId);
 ## 📦 Módulo 4 — Flyway: Migraciones de Base de Datos
 
 ### Objetivo
+
 Versionar el schema de la base de datos. Equivalente a TypeORM migrations pero más robusto.
 
 ### 🔄 TypeORM migrations → Flyway
@@ -659,19 +695,23 @@ class FlywayMigrationTest {
 ### Recursos
 
 **Documentación oficial:**
+
 - [Flyway Documentation](https://documentation.red-gate.com/flyway)
 - [Spring Boot Flyway Integration](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto.data-initialization.migration-tool.flyway)
 
 **Artículos:**
+
 - [Flyway with Spring Boot — Baeldung](https://www.baeldung.com/database-migrations-with-flyway)
 - [Flyway Best Practices — Baeldung](https://www.baeldung.com/flyway-migrations)
 - [Testing Flyway Migrations — Baeldung](https://www.baeldung.com/database-migration-tool-comparison)
 
 **Videos:**
+
 - [Flyway Tutorial — Amigoscode (YouTube)](https://www.youtube.com/watch?v=1cHlyDN3CKE)
 - [Database Migrations with Flyway — Dan Vega](https://www.youtube.com/watch?v=YjMgQnVJuHU)
 
 ### 🔨 Proyecto — Sprint 4: Schema versionado
+
 - Mover toda la DDL a migrations de Flyway (eliminar `ddl-auto: create`)
 - Crear migraciones para todas las entidades
 - Migración con datos seed para testing
@@ -683,6 +723,7 @@ class FlywayMigrationTest {
 ## 📦 Módulo 5 — Spring Security + JWT + OAuth2
 
 ### Objetivo
+
 Segurizar la API con autenticación JWT stateless y autorización basada en roles. El módulo más complejo del plan.
 
 ### 🔄 NestJS Passport → Spring Security
@@ -826,11 +867,13 @@ public class AccountService {
 ### Recursos
 
 **Documentación oficial:**
+
 - [Spring Security Reference 6.x](https://docs.spring.io/spring-security/reference/)
 - [Spring Security Architecture](https://spring.io/guides/topicals/spring-security-architecture)
 - [Spring Security OAuth2 Resource Server](https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/index.html)
 
 **Artículos:**
+
 - [Spring Security JWT — Baeldung](https://www.baeldung.com/spring-security-oauth-jwt)
 - [Spring Boot 3 + JWT — Baeldung](https://www.baeldung.com/spring-boot-jwt-authentication)
 - [Method Security — Baeldung](https://www.baeldung.com/spring-security-method-security)
@@ -838,11 +881,13 @@ public class AccountService {
 - [OAuth2 with Spring Boot 3 — Baeldung](https://www.baeldung.com/spring-security-oauth)
 
 **Videos:**
+
 - [Spring Boot 3 + Spring Security 6 + JWT — Amigoscode (YouTube, muy completo)](https://www.youtube.com/watch?v=KxqlJblhzfI)
 - [Spring Security 6 Deep Dive — Dan Vega (YouTube)](https://www.youtube.com/watch?v=us0VjFiHogo)
 - [Spring Security Tutorial Series — Marco Codes](https://www.youtube.com/watch?v=b9O9NI-RJ3o)
 
 ### 🔨 Proyecto — Sprint 5: Autenticación completa
+
 - Registro y login con JWT (access + refresh token)
 - Refresh token endpoint
 - `@PreAuthorize` en todos los endpoints (users solo ven sus datos)
@@ -856,6 +901,7 @@ public class AccountService {
 ## 📦 Módulo 6 — OpenAPI 3 con Springdoc
 
 ### Objetivo
+
 Documentación automática de la API con OpenAPI 3. Equivalente a `@nestjs/swagger`.
 
 ### 🔄 NestJS Swagger → Springdoc
@@ -951,18 +997,22 @@ springdoc:
 ### Recursos
 
 **Documentación oficial:**
+
 - [Springdoc OpenAPI Documentation](https://springdoc.org/)
 - [OpenAPI 3.0 Specification](https://swagger.io/specification/)
 
 **Artículos:**
+
 - [Setting Up Swagger 3 with Spring Boot — Baeldung](https://www.baeldung.com/spring-rest-openapi-documentation)
 - [Springdoc with Spring Security — Baeldung](https://www.baeldung.com/spring-rest-docs-vs-openapi)
 
 **Videos:**
+
 - [OpenAPI with Spring Boot 3 — Amigoscode](https://www.youtube.com/watch?v=2o_3hjUPAfQ)
 - [Springdoc Tutorial — Dan Vega](https://www.youtube.com/watch?v=iaVBleTf88U)
 
 ### 🔨 Proyecto — Sprint 6: Documentación viva
+
 - Documentar todos los controllers con `@Operation` y `@ApiResponse`
 - Documentar todos los DTOs con `@Schema`
 - Configurar autenticación JWT en Swagger UI
@@ -974,6 +1024,7 @@ springdoc:
 ## 📦 Módulo 7 — Integración con APIs Externas
 
 ### Objetivo
+
 Consumir APIs externas de forma resiliente. Equivalente a `HttpService` de NestJS + Axios.
 
 ### 🔄 Axios/HttpService → WebClient
@@ -1055,20 +1106,24 @@ public class ExchangeRateService {
 ### Recursos
 
 **Documentación oficial:**
+
 - [Spring WebClient](https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-client)
 - [Resilience4j Documentation](https://resilience4j.readme.io/docs/getting-started)
 
 **Artículos:**
+
 - [Spring WebClient vs RestTemplate — Baeldung](https://www.baeldung.com/spring-webclient-resttemplate)
 - [WebClient Tutorial — Baeldung](https://www.baeldung.com/spring-5-webclient)
 - [Resilience4j with Spring Boot — Baeldung](https://www.baeldung.com/spring-boot-resilience4j)
 - [Circuit Breaker Pattern — Baeldung](https://www.baeldung.com/resilience4j)
 
 **Videos:**
+
 - [Spring WebClient Tutorial — Amigoscode](https://www.youtube.com/watch?v=F3uJyeAyv5g)
 - [Resilience4j Crash Course — Marco Codes](https://www.youtube.com/watch?v=x7oCa1kpBMU)
 
 ### 🔨 Proyecto — Sprint 7: Integración de divisas
+
 - Integrar API de tipos de cambio (ExchangeRate-API.com — free tier)
 - Conversión de transacciones a moneda base del usuario
 - Circuit breaker con Resilience4j
@@ -1081,6 +1136,7 @@ public class ExchangeRateService {
 ## 📦 Módulo 8 — Testing Completo
 
 ### Objetivo
+
 Suite de tests completa: unitarios, de integración y E2E. Es el módulo donde Spring brilla frente a Node.
 
 ### 🔄 Jest/Supertest → JUnit 5/MockMvc/Testcontainers
@@ -1274,6 +1330,7 @@ class AccountIntegrationTest {
 ### Recursos
 
 **Documentación oficial:**
+
 - [Spring Boot Testing Reference](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#testing)
 - [JUnit 5 User Guide](https://junit.org/junit5/docs/current/user-guide/)
 - [Mockito Documentation](https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html)
@@ -1281,6 +1338,7 @@ class AccountIntegrationTest {
 - [AssertJ Documentation](https://assertj.github.io/doc/)
 
 **Artículos:**
+
 - [Testing in Spring Boot — Baeldung Guide](https://www.baeldung.com/spring-boot-testing)
 - [MockMvc Tutorial — Baeldung](https://www.baeldung.com/integration-testing-in-spring)
 - [Testcontainers with Spring Boot — Baeldung](https://www.baeldung.com/spring-boot-testcontainers-integration-test)
@@ -1288,11 +1346,13 @@ class AccountIntegrationTest {
 - [Spring Security Testing — Baeldung](https://www.baeldung.com/spring-security-integration-tests)
 
 **Videos:**
+
 - [Spring Boot Testing — Amigoscode (YouTube)](https://www.youtube.com/watch?v=jqwZthuBmZY)
 - [Testcontainers Tutorial — Marco Codes (YouTube)](https://www.youtube.com/watch?v=erp-7MCK5BU)
 - [Testing Spring Boot Apps — Dan Vega (YouTube)](https://www.youtube.com/watch?v=Ym0LFAnBnXI)
 
 ### 🔨 Proyecto — Sprint 8: Suite de tests
+
 - Tests unitarios para todos los Services (>80% cobertura)
 - Tests de integración con MockMvc para todos los Controllers
 - Tests E2E con Testcontainers para los flujos críticos
@@ -1306,11 +1366,13 @@ class AccountIntegrationTest {
 ## 📦 Módulo 9 — Production-Ready
 
 ### Objetivo
+
 Preparar la API para producción: observabilidad, performance, y operaciones.
 
 ### Temas clave
 
 **Spring Actuator — Observabilidad**
+
 ```yaml
 management:
   endpoints:
@@ -1327,6 +1389,7 @@ management:
 ```
 
 **Logging estructurado con SLF4J + Logback**
+
 ```java
 @Slf4j   // Lombok genera: private static final Logger log = LoggerFactory.getLogger(...)
 @Service
@@ -1347,6 +1410,7 @@ public class AccountService {
 ```
 
 **Caching con Caffeine**
+
 ```java
 @Configuration
 @EnableCaching
@@ -1365,6 +1429,7 @@ public class CacheConfig {
 ```
 
 **Async con @Async**
+
 ```java
 @Service
 @EnableAsync
@@ -1380,6 +1445,7 @@ public class NotificationService {
 ```
 
 **Docker Compose para producción**
+
 ```yaml
 services:
   app:
@@ -1413,6 +1479,7 @@ services:
 ### Recursos
 
 **Artículos:**
+
 - [Spring Boot Actuator — Baeldung](https://www.baeldung.com/spring-boot-actuators)
 - [Spring Boot Caching — Baeldung](https://www.baeldung.com/spring-cache-tutorial)
 - [Spring @Async — Baeldung](https://www.baeldung.com/spring-async)
@@ -1420,10 +1487,12 @@ services:
 - [Spring Boot Docker — Spring Guides](https://spring.io/guides/topicals/spring-boot-docker)
 
 **Videos:**
+
 - [Spring Boot Actuator — Amigoscode](https://www.youtube.com/watch?v=ojhEnUQvMQs)
 - [Dockerizing Spring Boot — TechWorld with Nana](https://www.youtube.com/watch?v=EFMDfHXAlNw)
 
 ### 🔨 Proyecto — Sprint 9: Deploy-ready
+
 - Actuator con health check personalizado (DB + API externa)
 - Métricas Prometheus + Grafana (Docker Compose)
 - Dockerfile multi-stage optimizado
@@ -1437,12 +1506,14 @@ services:
 ## 📚 Recursos Adicionales Recomendados
 
 ### Libros
+
 - *Spring in Action, 6th Edition* — Craig Walls *(el libro de referencia)*
 - *Effective Java, 3rd Edition* — Joshua Bloch *(Java idiomático)*
 - *High-Performance Java Persistence* — Vlad Mihalcea *(JPA avanzado)*
 - *Spring Security in Action* — Laurentiu Spilca *(Security en profundidad)*
 
 ### Blogs y comunidades
+
 - [Baeldung.com](https://www.baeldung.com) — La biblia de Spring
 - [Vlad Mihalcea's Blog](https://vladmihalcea.com) — Experto en Hibernate
 - [Dan Vega's Blog](https://www.danvega.dev) — Spring developer advocate de VMware
@@ -1451,12 +1522,14 @@ services:
 - [Stack Overflow — spring tag](https://stackoverflow.com/questions/tagged/spring-boot)
 
 ### YouTube Channels imprescindibles
+
 - [Amigoscode](https://www.youtube.com/@amigoscode) — Tutoriales Spring completos
 - [Marco Codes](https://www.youtube.com/@MarcoCodes) — Spring moderno y profundo
 - [Dan Vega](https://www.youtube.com/@DanVega) — Spring developer advocate
 - [Teddy Smith](https://www.youtube.com/@TeddySmithDev) — Spring Boot práctico
 
 ### Herramientas del día a día
+
 - [start.spring.io](https://start.spring.io) — Generador de proyectos
 - [Baeldung REST API](https://api.github.com) — Para probar endpoints
 - [HTTPie](https://httpie.io) — Mejor que curl para APIs
